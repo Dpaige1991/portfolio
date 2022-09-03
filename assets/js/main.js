@@ -1,39 +1,22 @@
-const navMenu = document.getElementById('nav-menu'),
-    toggleMenu = document.getElementById('nav-toggle'),
-    closeMenu = document.getElementById('nav-close')
+let menu = document.querySelector('#menu-icon')
+let navbar = document.querySelector('.navbar');
 
-toggleMenu.addEventListener('click', ()=>{
-    navMenu.classList.toggle('show')
+menu.onclick = () => {
+    menu.classList.toggle('bx-x');
+    navbar.classList.toggle('active');
+};
+
+window.onscroll = () => {
+    menu.classList.remove('bx-x');
+    navbar.classList.remove('active');
+};
+
+const sr = ScrollReveal ({
+    distance: '60px',
+    duration: 2500,
+    reset: true
 })
 
-closeMenu.addEventListener('click', ()=>{
-    navMenu.classList.remove('show')
-})
-
-const navLink = document.querySelectorAll('.nav__link')
-
-function linkAction(){
-    navMenu.classList.remove('show')
-}
-
-navLink.forEach(n => n.addEventListener('click', linkAction))
-
-const sections = document.querySelectorAll('section[id')
-
-window.addEventListener('scroll', scrollActive)
-
-function scrollActive(){
-    const scrollY = window.pageYOffset
-
-    sections.forEach(current => {
-        const sectionHeight = current.offsetHeight
-        const sectionTop = current.offsetTop - 50
-        sectionId = current.getAttribute('id')
-
-        if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
-            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active')
-        }else{
-            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active')
-        }
-    })
-}
+sr.reveal('.home-text',{delay:200, origin:'top'})
+sr.reveal('.home-img',{delay:200, origin:'top'})
+sr.reveal('.about, .services, .cta, .resume, .contact, .copyright', {delay:200, origin:'top'})
